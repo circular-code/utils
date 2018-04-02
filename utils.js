@@ -176,5 +176,8 @@ var utils = {
         }
         return array;
     },
+    nodelistToArray: function(nodelist) {
+        return [].slice.call(nodelist);
+    }
 };
 
