@@ -178,6 +178,21 @@ var utils = {
     },
     nodelistToArray: function(nodelist) {
         return [].slice.call(nodelist);
+    },
+    cloneObjectFlat: function() {
+        return Object.assign({}, obj);
+    },
+    cloneObjectDeep : function(obj) {
+        // looses methods and dates, rework
+        //if (!obj instanceof Date)
+        //    JSON.parse(JSON.stringify(obj));    
+    },
+    // flat array = array without objects
+    cloneArrayFlat: function(arr) {
+        return arr.slice(0);
+    },
+    cloneArrayDeep: function() {
+        // cloneobject deep foreach index
     }
 };
 
