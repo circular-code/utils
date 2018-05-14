@@ -179,20 +179,63 @@ var utils = {
     nodelistToArray: function(nodelist) {
         return [].slice.call(nodelist);
     },
-    cloneFlatObject: function() {
+    // only works with primitives inside passedObject keys, the object only has one layer
+    cloneFlatDataObject: function(passedObject) {
+        if (!obj instanceof Object)
+            return obj;
+        
+        var copy = obj.constructor();
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+        }
+        return copy;
+    },
+    cloneFlatDataArray: function(arr) {
+        return arr.slice(0);
+    },
+    // es6 only, slow
+    cloneFlatObject: function(obj) {
         return Object.assign({}, obj);
     },
     // This method will fail to copy anything that is not part of the JSON spec, but it can be used for simple data
-    deepcloneDataObject : function(obj) {
-         return JSON.parse(JSON.stringify(obj));    
+    cloneData : function(objOrArray) {
+         return JSON.parse(JSON.stringify(objOrArray));
     },
-    deepcloneFullObject : function(obj) {
-         // TODO
+    cloneObject : function(o) {
+        const gdcc = "__getDeepCircularCopy__";
+        if (o !== Object(o)) {
+            return o; // primitive value
+        }
+
+        var set = gdcc in o,
+            cache = o[gdcc],
+            result;
+        if (set && typeof cache == "function") {
+            return cache();
+        }
+        // else
+        o[gdcc] = function() { return result; }; // overwrite
+        if (o instanceof Array) {
+            result = [];
+            for (var i=0; i<o.length; i++) {
+                result[i] = cloneDR(o[i]);
+            }
+        } else {
+            result = {};
+            for (var prop in o)
+                if (prop != gdcc)
+                    result[prop] = cloneDR(o[prop]);
+                else if (set)
+                    result[prop] = cloneDR(cache);
+        }
+        if (set) {
+            o[gdcc] = cache; // reset
+        } else {
+            delete o[gdcc]; // unset again
+        }
+        return result;
     },
-    cloneArrayWithoutObjects: function(arr) {
-        return arr.slice(0);
-    },
-    cloneArrayWithObjects: function() {
+    cloneArray: function() {
         // cloneobject deep foreach index
     }
 };
