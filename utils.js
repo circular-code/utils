@@ -179,19 +179,20 @@ var utils = {
     nodelistToArray: function(nodelist) {
         return [].slice.call(nodelist);
     },
-    cloneObjectFlat: function() {
+    cloneFlatObject: function() {
         return Object.assign({}, obj);
     },
-    cloneObjectDeep : function(obj) {
-        // looses methods and dates, rework
-        //if (!obj instanceof Date)
-        //    JSON.parse(JSON.stringify(obj));    
+    // This method will fail to copy anything that is not part of the JSON spec, but it can be used for simple data
+    deepcloneDataObject : function(obj) {
+         return JSON.parse(JSON.stringify(obj));    
     },
-    // flat array = array without objects
-    cloneArrayFlat: function(arr) {
+    deepcloneFullObject : function(obj) {
+         // TODO
+    },
+    cloneArrayWithoutObjects: function(arr) {
         return arr.slice(0);
     },
-    cloneArrayDeep: function() {
+    cloneArrayWithObjects: function() {
         // cloneobject deep foreach index
     }
 };
