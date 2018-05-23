@@ -238,6 +238,7 @@ var utils = {
     cloneArray: function() {
         // cloneobject deep foreach index
     },
+    // workaround for chrome 1.005toFixed(2) rounds to 1.00 instead of 1.01
     roundTo: function(n, digits) {
         if (typeof digits === 'undefined')
             digits = 0;
