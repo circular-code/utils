@@ -237,6 +237,14 @@ var utils = {
     },
     cloneArray: function() {
         // cloneobject deep foreach index
+    },
+    roundTo: function(n, digits) {
+        if (typeof digits === 'undefined')
+            digits = 0;
+
+        var multiplicator = Math.pow(10, digits);
+        n = parseFloat((n * multiplicator).toFixed(11));
+        return Math.round(n) / multiplicator;
     }
 };
 
