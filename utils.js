@@ -246,6 +246,9 @@ var utils = {
         var multiplicator = Math.pow(10, digits);
         n = parseFloat((n * multiplicator).toFixed(11));
         return Math.round(n) / multiplicator;
+    },
+    regexPatterns = {
+        name: /^[A-z\u00C0-\u00ff0-9-_ .]+$/,
     }
 };
 
