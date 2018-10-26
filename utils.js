@@ -270,7 +270,15 @@ var utils = {
           }
         }
         return query_string;
+    },
+    percievedBrightness: function(colorObj) {
+        return Math.sqrt(
+            colorObj.r * colorObj.r * 0.241 +
+            colorObj.g * colorObj.g * 0.691 +
+            colorObj.b * colorObj.b * 0.068);
+    },
+    blackOrWhite: function(color) {
+        return utils.percievedBrightness(color) < 130 ? 'white' : 'black';
     }
-    
 };
 
