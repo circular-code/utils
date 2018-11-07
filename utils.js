@@ -252,8 +252,11 @@ var utils = {
         return utils.percievedBrightness(color) < 130 ? 'white' : 'black';
     },
     isOdd: function(n) {
+        //return n % 2 === 1;
         //abs is neccecary because modulo would otherwise return incorrect for negative numbers (e.g -5)
-        return Math.abs(n % 2) === 1;
+        //return Math.abs(n % 2) === 1;
+        // can also be written like this
+        return n % 2 !== 0;
     }
 }
 };
