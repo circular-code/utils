@@ -250,6 +250,11 @@ var utils = {
     },
     blackOrWhite: function(color) {
         return utils.percievedBrightness(color) < 130 ? 'white' : 'black';
+    },
+    isOdd: function(n) {
+        //abs is neccecary because modulo would otherwise return incorrect for negative numbers (e.g -5)
+        return Math.abs(n % 2) === 1;
     }
+}
 };
 
