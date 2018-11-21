@@ -259,11 +259,11 @@ var utils = {
         return n % 2 !== 0;
     },
     getCustomGlobals: function() {
-        document.body.appendChild(document.createElement('div')).innerHTML='<iframe id="__$$getCustomGlobals%%__" style="display:none"></iframe>';
+        document.body.appendChild(document.createElement('div')).innerHTML='<iframe id="__getCustomGlobals__" style="display:none"></iframe>';
         for (a in window) if (!(a in window.frames[window.frames.length-1]))
             // hides function, logs rest
             console.log(typeof a === 'function' ? '' : a, typeof window[a] === 'function' ? '' : window[a])
-        document.body.removeChild($$('#__$$getCustomGlobals%%__')[0].parentNode);
+        document.body.removeChild($$('#__getCustomGlobals__')[0].parentNode);
     }
 }
 };
