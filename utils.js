@@ -262,8 +262,9 @@ var utils = {
         document.body.appendChild(document.createElement('div')).innerHTML='<iframe id="__getCustomGlobals__" style="display:none"></iframe>';
         for (a in window) if (!(a in window.frames[window.frames.length-1]))
             // hides function, logs rest
-            console.log(typeof a === 'function' ? '' : a, typeof window[a] === 'function' ? '' : window[a])
-        document.body.removeChild($$('#__getCustomGlobals__')[0].parentNode);
+			if (typeof window[a] !== 'function')
+            	console.log(a, window[a])
+        document.body.removeChild($$('#__getCustomGlobals__')[0].parentNode)
     }
 }
 };
