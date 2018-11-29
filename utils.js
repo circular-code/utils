@@ -254,9 +254,10 @@ var utils = {
     isOdd: function(n) {
         //return n % 2 === 1;
         //abs is neccecary because modulo would otherwise return incorrect for negative numbers (e.g -5)
-        //return Math.abs(n % 2) === 1;
-        // can also be written like this
-        return n % 2 !== 0;
+        return Math.abs(n % 2) === 1;
+        // can not be written like this
+        // return n % 2 !== 0;
+	// since it will return true on floats e.g. 2.1
     },
     getCustomGlobals: function() {
         document.body.appendChild(document.createElement('div')).innerHTML='<iframe id="__getCustomGlobals__" style="display:none"></iframe>';
