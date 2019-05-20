@@ -344,7 +344,6 @@ var utils = {
             else
                 return '';
         }
-    },
-}
+    }
 };
 
