@@ -266,7 +266,85 @@ var utils = {
 			if (typeof window[a] !== 'function')
             	console.log(a, window[a])
         document.body.removeChild($$('#__getCustomGlobals__')[0].parentNode)
-    }
+    },
+    sortByIndex: function(data, index) {
+
+        // sort descending by index
+
+        if (!index)
+            throw new Error('Es wurde kein Index an utils.sortByIndex übgergeben');
+
+        if (data instanceof Array) {
+
+            return data.sort(function(a, b) {
+                if (typeof a[index] === 'undefined') {
+                    if (typeof b[index] === 'undefined')
+                        return 0;
+                    else
+                        return 1;
+                }
+                else if (typeof b[index] === 'undefined')
+                    return -1;
+                return a[index] - b[index];
+            });
+        }
+        else {
+            utils.toast('Produkt konnte nicht geladen werden.');
+            throw new Error('Es wurde kein gültiges Array an utils.sortByIndex übergeben.');
+        }
+    },
+    isEmpty: function(value) {
+        if (typeof value !== 'object' || value === null) {
+            return utils.isEmptyValueType(value);
+        } else {
+            return utils.isEmptyReferenceType(value);
+        }
+    },
+    isEmptyValueType: function (value) {
+        return value === undefined || value === null || value === "";
+    },
+    isEmptyReferenceType: function (value) {
+        for (var key in value) {
+            if (value.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    },
+    bytesToDescriptive: function(bytes, addition) {
+        if (typeof bytes !== 'number' || bytes !== bytes)
+            return '';
+        if (bytes === 0)
+            return '0' + (addition || '');
+
+        var m = 1024;
+        var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        var i = Math.floor(Math.log(bytes) / Math.log(m));
+
+        return parseFloat((bytes / Math.pow(m, i)).toFixed(1)) + ' ' + sizes[i] + (addition || '');
+    },
+    getReadableMimetypes: function(mimeTypesString) {
+        if (typeof mimeTypesString !== 'string') {
+            return '';
+        }
+
+        if (mimeTypesString.indexOf('|') > -1) {
+            var mimeTypesArray = mimeTypesString.split('|');
+
+            for (var i = 0; i < mimeTypesArray.length; i++) {
+                if (mimeTypesArray[i].indexOf('/') > -1)
+                    mimeTypesArray[i] = ' ' + mimeTypesArray[i].split('/')[1].toUpperCase();
+                else
+                    mimeTypesArray[i] = ' Invalid Mime Type';
+            }
+            return mimeTypesArray.join(',');
+        }
+        else {
+            if (mimeTypesString.indexOf('/') > -1)
+                return ' ' + mimeTypesString.split('/')[1].toUpperCase();
+            else
+                return '';
+        }
+    },
 }
 };
 
