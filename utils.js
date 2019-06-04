@@ -379,3 +379,39 @@ var utils = {
     }
 };
 
+/* DRAG AND DROP
+$('.chart-type').on('dragstart', function() {
+    $('.layout-column').addClass('drag-border');
+    sym.data.temp.dragsource = $(this);
+});
+$('.chart-type').on('dragend', function() {
+    $('.layout-column').removeClass('drag-border');
+    $('.layout-column').each(function() {
+	$(this).removeClass('over');
+	$('.chart-type').css('opacity','');
+    });
+});
+layoutColumn.on('dragenter', function(e) {
+if (e.preventDefault)
+    e.preventDefault();
+
+    sym.data.dragCounter++;
+    $(this).addClass('over');
+});
+layoutColumn.on('dragover', function(e) {
+if (e.preventDefault)
+    e.preventDefault();
+});
+layoutColumn.on('dragleave', function() {
+sym.data.dragCounter--;
+
+if (sym.data.dragCounter === 0) {
+    $(this).removeClass('over');
+}
+});
+layoutColumn.on('drop', function() {
+sym.fn.handleDrop(this);
+});
+
+*/
+
